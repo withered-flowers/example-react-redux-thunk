@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   counterFirstNumberDecrement,
   counterFirstNumberIncrement,
+  counterResetNumber,
+  counterSecondNumberDecrement,
+  counterSecondNumberIncrement,
 } from "../actions/actionCreator";
+import CustomButton from "../components/CustomButton";
 
 const CounterPage = () => {
   const [firstAmount, setFirstAmount] = useState(0);
@@ -18,8 +22,13 @@ const CounterPage = () => {
   const firstDecrementButtonOnClickHandler = () =>
     dispatch(counterFirstNumberDecrement(Number(firstAmount)));
 
-  const secondIncrementButtonOnClickHandler = () => {};
-  const secondDecrementButtonOnClickHandler = () => {};
+  const secondIncrementButtonOnClickHandler = () =>
+    dispatch(counterSecondNumberIncrement(Number(secondAmount)));
+
+  const secondDecrementButtonOnClickHandler = () =>
+    dispatch(counterSecondNumberDecrement(Number(secondAmount)));
+
+  const resetButtonOnClickHandler = () => dispatch(counterResetNumber());
 
   return (
     <section className="bg-gray-100 flex flex-col gap-4 p-4">
@@ -39,18 +48,12 @@ const CounterPage = () => {
           value={firstAmount}
           onChange={(evt) => setFirstAmount(evt.currentTarget.value)}
         />
-        <button
-          className="bg-gray-400 text-white py-2 px-4"
-          onClick={firstIncrementButtonOnClickHandler}
-        >
+        <CustomButton onClick={firstIncrementButtonOnClickHandler}>
           Increment
-        </button>
-        <button
-          className="bg-gray-400 text-white py-2 px-4"
-          onClick={firstDecrementButtonOnClickHandler}
-        >
+        </CustomButton>
+        <CustomButton onClick={firstDecrementButtonOnClickHandler}>
           Decrement
-        </button>
+        </CustomButton>
       </section>
       <section className="flex gap-2">
         <input
@@ -59,12 +62,20 @@ const CounterPage = () => {
           id="secondCounter"
           placeholder="Second Counter"
           className="py-2 px-4"
+          value={secondAmount}
+          onChange={(evt) => setSecondAmount(evt.currentTarget.value)}
         />
-        <button className="bg-gray-400 text-white py-2 px-4">Increment</button>
-        <button className="bg-gray-400 text-white py-2 px-4">Decrement</button>
+        <CustomButton onClick={secondIncrementButtonOnClickHandler}>
+          Increment
+        </CustomButton>
+        <CustomButton onClick={secondDecrementButtonOnClickHandler}>
+          Decrement
+        </CustomButton>
       </section>
       <section>
-        <button className="bg-gray-400 text-white py-2 px-4">Reset All</button>
+        <CustomButton onClick={resetButtonOnClickHandler}>
+          Reset All
+        </CustomButton>
       </section>
     </section>
   );
