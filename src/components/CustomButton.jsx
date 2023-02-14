@@ -1,5 +1,7 @@
-export default ({ children }) => {
+export default ({ children, onClick }) => {
   return (
-    <button className="bg-gray-400 text-white py-2 px-4">{children}</button>
+    <button onClick={onClick} className="bg-gray-400 text-white py-2 px-4">
+      {children}
+    </button>
   );
 };
